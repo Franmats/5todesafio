@@ -22,13 +22,11 @@ function auth(req,res,next) {
 }
 router.get("/profile", auth ,(req,res) => {
     const user = req.session.user
-    const admin = {
-        user,
-        roll: admin
-    }
     if ((user.email == "adminCoder@coder.com") && (user.password == "adminCod3r123")){
-        res.render("profile",admin)
+        user.roll="admin"
+        res.render("profile",user)
     }
+    user.roll="usuario"
     res.render("profile",user)
 })
 
